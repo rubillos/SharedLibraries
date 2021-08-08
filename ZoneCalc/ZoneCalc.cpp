@@ -90,19 +90,18 @@ TimeChangeRule usADT = {"ADT", Second, Sun, Mar, 2, -8 * 60};
 TimeChangeRule usAST = {"AST", First, Sun, Nov, 2, -9 * 60};
 Timezone tzAlaska(usADT, usAST);
 
-Timezone* ZoneCalc::timezoneForOffset(int16_t zoneOffset) {
-    if (zoneOffset == 9) { return &tzAlaska; }
-    else if (zoneOffset == 8) { return &tzPacific; }
-    else if (zoneOffset == 7) { return &tzMountain; }
-    else if (zoneOffset == 6) { return &tzCentral; }
+Timezone* timezoneForOffset(int16_t zoneOffset) {
+    if (zoneOffset == -9) { return &tzAlaska; }
+    else if (zoneOffset == -8) { return &tzPacific; }
+    else if (zoneOffset == -7) { return &tzMountain; }
+    else if (zoneOffset == -6) { return &tzCentral; }
     else return &tzEastern;
 }
 
 bool ZoneCalc::dateIsDST(uint16_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, int16_t zoneOffset) {
     Timezone* timezone = timezoneForOffset(zoneOffset);
     TimeElements timeParts = { 0, minute, hour, 0, day, month, (uint8_t)(year - 1970) };
-    time_t utcTime = makeTime(timeParts);
 
-    return timezone->utcIsDST(utcTime);
+    return timezone->utcIsDST(makeTime(timeParts));
 }
 

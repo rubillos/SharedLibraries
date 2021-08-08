@@ -29,7 +29,6 @@ class ZoneCalc {
 		int orientation(FloatPt p, FloatPt q, FloatPt r);
 		bool doIntersect(FloatPt p1, FloatPt q1, FloatPt p2, FloatPt q2);
 		bool isInside(const FloatPt p, const FloatPt polygon[], int numPts);
-		Timezone* timezoneForOffset(int16_t zoneOffset);
 };
 
 #endif
