@@ -15,8 +15,8 @@ GFXcanvas2::GFXcanvas2(uint16_t w, uint16_t h) : Adafruit_GFX(w, h) {
 	setColor(0xFF, 0xFF, 0xFF);
 }
 
-GFXcanvas2::~GFXcanvas2(void) {
-	if (_buffer)
+GFXcanvas2::~GFXcanvas2() {
+	if (_buffer != nullptr)
 		free(_buffer);
 }
 
@@ -115,7 +115,6 @@ void GFXcanvas2::draw16(Adafruit_SPITFT* display, uint16_t x, uint16_t y, uint16
 }
 
 //---------------------------------------------------------
-
 GFXcanvas4::GFXcanvas4(uint16_t w, uint16_t h) : Adafruit_GFX(w, h) {
 	_w = w;
 	_h = h;
@@ -127,6 +126,11 @@ GFXcanvas4::GFXcanvas4(uint16_t w, uint16_t h) : Adafruit_GFX(w, h) {
 		}
 	}
 	setColor(0x00, 0x00, 0xFF);
+}
+
+GFXcanvas4::~GFXcanvas4() {
+	if (_buffer != nullptr)
+		free(_buffer);
 }
 
 void GFXcanvas4::setPalette(uint16_t* colors, uint8_t colorCount) {
@@ -191,11 +195,6 @@ bool GFXcanvas4::setIntensity(uint8_t intensity) {
 		visibleChange = (oldMax != _palette[15]);
 	}
 	return visibleChange;
-}
-
-GFXcanvas4::~GFXcanvas4(void) {
-	if (_buffer)
-		free(_buffer);
 }
 
 static uint8_t bitmask4[] = { 0x0F, 0xF0 };

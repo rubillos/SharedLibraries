@@ -13,7 +13,7 @@
 class GFXcanvas2 : public Adafruit_GFX {
 public:
   GFXcanvas2(uint16_t w, uint16_t h);
-  ~GFXcanvas2(void);
+  ~GFXcanvas2();
   void drawPixel(int16_t x, int16_t y, uint16_t color);
   void fillScreen(uint16_t color);
   void setColor(uint8_t red, uint8_t green, uint8_t blue);
@@ -32,7 +32,7 @@ private:
 class GFXcanvas4 : public Adafruit_GFX {
 public:
   GFXcanvas4(uint16_t w, uint16_t h);
-  ~GFXcanvas4(void);
+  ~GFXcanvas4();
   void drawPixel(int16_t x, int16_t y, uint16_t color);
   uint16_t getPixel(int16_t x, int16_t y);
   void fillScreen(uint16_t color);
