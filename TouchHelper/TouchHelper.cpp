@@ -1,7 +1,9 @@
 #include "TouchHelper.h"
 
-TouchHelper::TouchHelper(Adafruit_STMPE610* touchDriver) {
+TouchHelper::TouchHelper(Adafruit_STMPE610* touchDriver, bool flip) {
     _touchDriver = touchDriver;
+    _rangeMin = (flip) ? 100 : 0;
+    _rangeMax = (flip) ? 0 : 100;
 }
 
 int32_t TouchHelper::mapAndConstrain(int32_t value, int32_t in_min, int32_t in_max, int32_t out_min, int32_t out_max) {
@@ -37,8 +39,8 @@ TouchType TouchHelper::checkTouch() {
     isPressed = (touchCount>0) && (z < 50) && (_releaseTime > 200);
 
     if (isPressed) {
-        _lastX = mapAndConstrain(y, 400, 3600, 0, 100);
-        _lastY = mapAndConstrain(x, 400, 3600, 0, 100);
+        _lastX = mapAndConstrain(y, 400, 3600, _rangeMin, _rangeMax);
+        _lastY = mapAndConstrain(x, 400, 3600, _rangeMin, _rangeMax);
         type = (_wasPressed) ? touchStillPressed : touchPressed;
     }
   }
