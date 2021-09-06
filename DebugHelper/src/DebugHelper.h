@@ -6,6 +6,7 @@
 #ifdef DO_SERIAL
 #define Debug_print(...) Serial.print(__VA_ARGS__)
 #define Debug_println(...) Serial.println(__VA_ARGS__)
+#define Debug_flush(...) Serial.flush()
 #define Debug_begin(...) Serial.begin(__VA_ARGS__)
 #define Debug_begin_wait(...) { Serial.begin(__VA_ARGS__); while (!Serial); Serial.println(); delay(250); }
 #define Debug_delay(...) delay(__VA_ARGS__)
@@ -34,6 +35,7 @@ extern RTT_Helper rtt;
 
 #define Debug_print(...) rtt.print(__VA_ARGS__)
 #define Debug_println(...) rtt.println(__VA_ARGS__)
+#define Debug_flush() rtt.flush()
 #define Debug_begin(...) SEGGER_RTT_ConfigUpBuffer(0, NULL, NULL, 0, SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL)
 #define Debug_begin_wait(...) Debug_begin(__VA_ARGS__)
 #define Debug_delay(...) delay(__VA_ARGS__)
@@ -43,6 +45,7 @@ extern RTT_Helper rtt;
 #ifndef Debug_defined
 #define Debug_print(...)
 #define Debug_println(...)
+#define Debug_flush(...)
 #define Debug_begin(...)
 #define Debug_begin_wait(...)
 #define Debug_delay(...)
