@@ -6,7 +6,7 @@ GFXcanvas2::GFXcanvas2(uint16_t w, uint16_t h) : Adafruit_GFX(w, h) {
 	_w = w;
 	_h = h;
 	_rowBytes = (w + 3) / 4;
-	uint16_t bytes = _rowBytes * _h;
+	uint32_t bytes = _rowBytes * _h;
 	if (bytes > 0) {
 		if ((_buffer = (uint8_t *)malloc(bytes))) {
 			memset(_buffer, 0, bytes);
@@ -61,15 +61,15 @@ void GFXcanvas2::fillScreen(uint16_t color) {
 }
 
 void GFXcanvas2::draw16(Adafruit_SPITFT* display, uint16_t x, uint16_t y, uint16_t* colors) {
-	int16_t xDest = x, yDest = y, widthDest = _width, heightDest = _height;
-	int16_t vMin = 0, vMax = _height, hMin = 0, hMax = _width;
+	int32_t xDest = x, yDest = y, widthDest = _width, heightDest = _height;
+	int32_t vMin = 0, vMax = _height, hMin = 0, hMax = _width;
 
 	if (x < 0) {
 		xDest = 0;
 		widthDest -= -x;
 		hMin = -x;
 	}
-	int16_t xOver = (x + _width) - display->width();
+	int32_t xOver = (x + _width) - display->width();
 	if (xOver > 0) {
 		widthDest -= xOver;
 		hMax -= xOver;
@@ -79,7 +79,7 @@ void GFXcanvas2::draw16(Adafruit_SPITFT* display, uint16_t x, uint16_t y, uint16
 		heightDest -= -y;
 		vMin = -y;
 	}
-	int16_t yOver = (y + _height) - display->height();
+	int32_t yOver = (y + _height) - display->height();
 	if (yOver > 0) {
 		heightDest -= yOver;
 		vMax -= yOver;
@@ -119,7 +119,7 @@ GFXcanvas4::GFXcanvas4(uint16_t w, uint16_t h) : Adafruit_GFX(w, h) {
 	_w = w;
 	_h = h;
 	_rowBytes = (w + 1) / 2;
-	uint16_t bytes = _rowBytes * _h;
+	uint32_t bytes = _rowBytes * _h;
 	if (bytes > 0) {
 		if ((_buffer = (uint8_t *)malloc(bytes))) {
 			memset(_buffer, 0, bytes);
@@ -233,15 +233,15 @@ void GFXcanvas4::fillScreen(uint16_t color) {
 }
 
 void GFXcanvas4::draw16(Adafruit_SPITFT* display, int16_t x, int16_t y, uint16_t* colors) {
-	int16_t xDest = x, yDest = y, widthDest = _width, heightDest = _height;
-	int16_t vMin = 0, vMax = _height, hMin = 0, hMax = _width;
+	int32_t xDest = x, yDest = y, widthDest = _width, heightDest = _height;
+	int32_t vMin = 0, vMax = _height, hMin = 0, hMax = _width;
 
 	if (x < 0) {
 		xDest = 0;
 		widthDest -= -x;
 		hMin = -x;
 	}
-	int16_t xOver = (x + _width) - display->width();
+	int32_t xOver = (x + _width) - display->width();
 	if (xOver > 0) {
 		widthDest -= xOver;
 		hMax -= xOver;
@@ -251,7 +251,7 @@ void GFXcanvas4::draw16(Adafruit_SPITFT* display, int16_t x, int16_t y, uint16_t
 		heightDest -= -y;
 		vMin = -y;
 	}
-	int16_t yOver = (y + _height) - display->height();
+	int32_t yOver = (y + _height) - display->height();
 	if (yOver > 0) {
 		heightDest -= yOver;
 		vMax -= yOver;
