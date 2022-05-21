@@ -25,6 +25,17 @@ void PushButton::swapPinsWith(PushButton &otherButton) {
   _returnedLongPress = false;
 }
 
+int32_t mapAndConstrainLong(int32_t value, int32_t in_min, int32_t in_max, int32_t out_min, int32_t out_max) {
+  value = (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+
+  int32_t minV = min(out_min, out_max);
+  int32_t maxV = max(out_min, out_max);
+
+  if (value <= minV) { return minV; }
+  else if (value >= maxV) { return maxV; }
+  else { return value; }
+}
+
 buttonPressType PushButton::checkPress() {
   buttonPressType pressed = notPressed;
   bool currentButtonState = isCurrentlyPressed();
@@ -47,8 +58,18 @@ buttonPressType PushButton::checkPress() {
       if ((_longMillis == 0) && !_buttonIsPressed) {
         pressed = shortPress;
       }
+
       if ((_longMillis == 0) && (_repeatDelay > REPEAT_DELAY)) {
-        if (_repeatRate > REPEAT_RATE) {
+        uint32_t curRepeatRate;
+
+        if (_repeatRampTime > 0) {
+          curRepeatRate = mapAndConstrainLong(_stateChangeTime-REPEAT_DELAY, 0, _repeatRampTime, REPEAT_RATE, _repeatRampMinRate);
+        }
+        else {
+          curRepeatRate = REPEAT_RATE;
+        }
+
+        if (_repeatRate > curRepeatRate) {
           pressed = shortPress;
           _repeatRate = 0;
         }

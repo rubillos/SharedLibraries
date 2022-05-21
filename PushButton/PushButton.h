@@ -22,10 +22,16 @@ class PushButton
   public:
     PushButton(int16_t pinNumber, bool doublePress = true, uint32_t longTimeSeconds = LONG_PRESS_TIME/1000);
     buttonPressType checkPress();
-    bool isCurrentlyPressed();
+    virtual bool isCurrentlyPressed();
+    uint32_t currentStateTime() { return _stateChangeTime; };
 
     int16_t pinNumber();
     void swapPinsWith(PushButton &otherButton);
+
+    void SetRepeatRamp(uint16_t rampMinRate, uint32_t rampTime) {
+                                                _repeatRampMinRate = rampMinRate;
+                                                _repeatRampTime = rampTime;
+                                              };
 
   protected:
     int16_t _pinNumber;
@@ -40,6 +46,9 @@ class PushButton
     bool _returnedLongPress = false;
     elapsedMillis _repeatDelay;
     elapsedMillis _repeatRate;
+
+    uint16_t _repeatRampMinRate = 0;
+    uint16_t _repeatRampTime = 0;
 };
 
 #endif
