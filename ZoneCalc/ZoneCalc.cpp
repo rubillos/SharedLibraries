@@ -1,6 +1,9 @@
 // empty file to make Library Manager happy
 #include "ZoneCalc.h"
 
+// Timezone boundaries derived from:
+// // http://ontimezone.com
+
 #include "ZoneSummer.h"
 #include "ZoneWinter.h"
 
