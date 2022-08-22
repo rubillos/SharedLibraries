@@ -1,12 +1,19 @@
 #ifndef _EEPROM_HELPER_
 #define _EEPROM_HELPER_
 
-#include "I2C_eeprom.h"
+#include "EEPROM.h"
 #include "elapsedMillis.h"
+
+#ifdef USE_I2C_EEPROM
+#include "I2C_eeprom.h"
+#endif
 
 class EEPromHelper {
     public:
+        EEPromHelper();
+#ifdef USE_I2C_EEPROM
         EEPromHelper(uint8_t address = 0x57, uint32_t numBytes = 4096);
+#endif
         bool begin();
         bool setPrefs(void* data, uint32_t sizeInBytes, uint32_t version);
         bool writePrefs(bool force = false);
@@ -18,8 +25,10 @@ class EEPromHelper {
     private:
         uint8_t _address;
         uint32_t _numBytes;
+#ifdef USE_I2C_EEPROM
         I2C_eeprom* _eeprom;
-    
+#endif
+
         void* _data;
         uint32_t _sizeInBytes;
         uint32_t _version;
@@ -35,8 +44,8 @@ class EEPromHelper {
         uint32_t generateChecksum(void* data, uint32_t sizeInBytes);
         uint32_t appendToChecksum(uint32_t checksum, void* data, uint32_t sizeInBytes);
 
-        bool verifiedReadBlock(const uint16_t memoryAddress, void* data, uint32_t sizeInBytes);
-        bool verifiedUpdateBlock(const uint16_t memoryAddress, void* data, uint32_t sizeInBytes);
+        bool verifiedReadBlock(uint16_t memoryAddress, void* data, uint32_t sizeInBytes);
+        bool verifiedUpdateBlock(uint16_t memoryAddress, void* data, uint32_t sizeInBytes);
 };
 
 
