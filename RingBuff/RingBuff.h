@@ -21,6 +21,32 @@ class RingBuff {
       }
       return _sum / _sampleCount;
     };
+    T minimum(T value) {
+      if (_sampleCount == 0) {
+        return value;
+      }
+      int16_t index = _index-1;
+      for (uint16_t i=0; i<_sampleCount; i++) {
+        if (index < 0) {
+          index += _bufferSize;
+        }
+        value = min(value, _buffer[index]);
+      }
+      return value;
+    };
+    T maximum(T value) {
+      if (_sampleCount == 0) {
+        return value;
+      }
+      int16_t index = _index-1;
+      for (uint16_t i=0; i<_sampleCount; i++) {
+        if (index < 0) {
+          index += _bufferSize;
+        }
+        value = max(value, _buffer[index]);
+      }
+      return value;
+    };
     T lookup(uint16_t itemIndex) {
       if (_sampleCount == 0) {
         return _buffer[0];
