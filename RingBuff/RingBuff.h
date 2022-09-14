@@ -30,7 +30,7 @@ class RingBuff {
         if (index < 0) {
           index += _bufferSize;
         }
-        value = min(value, _buffer[index]);
+        value = min(value, _buffer[index--]);
       }
       return value;
     };
@@ -43,7 +43,7 @@ class RingBuff {
         if (index < 0) {
           index += _bufferSize;
         }
-        value = max(value, _buffer[index]);
+        value = max(value, _buffer[index--]);
       }
       return value;
     };
