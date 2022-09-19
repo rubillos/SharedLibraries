@@ -57,8 +57,33 @@ class RingBuff {
       }
       return _buffer[destIndex];
     };
+    void replaceSample(uint16_t itemIndex, T sample) {
+      if (_sampleCount > 0 && itemIndex < _sampleCount) {
+        int16_t destIndex = _index-1-itemIndex;
+        if (destIndex < 0) {
+          destIndex += _bufferSize;
+        }
+        _buffer[destIndex] = sample;
+      }
+    };
+    T nextSample() {
+			if (_sampleCount) {
+        int16_t srcIndex = _index - _sampleCount;
+        if (srcIndex < 0) {
+          srcIndex += _bufferSize;
+        }
+        T sample = _buffer[srcIndex];
+				_sum -= sample;
+        _sampleCount--;
+        return sample;
+			}
+      else {
+        return _zero;
+      }
+    };
     uint16_t sampleCount() { return _sampleCount; };
-    void reset() { _sampleCount = 0; _sum = _zero; }
+    bool full() { return _sampleCount == _bufferSize; };
+    void reset() { _sampleCount = 0; _sum = _zero; };
 
   private:
     T* _buffer;
@@ -88,6 +113,15 @@ class LoopBuff {
         destIndex += _bufferSize;
       }
       return _buffer[destIndex];
+    };
+    void replaceSample(uint16_t itemIndex, T sample) {
+      if (_sampleCount > 0 && itemIndex < _sampleCount) {
+        int16_t destIndex = _index-1-itemIndex;
+        if (destIndex < 0) {
+          destIndex += _bufferSize;
+        }
+        _buffer[destIndex] = sample;
+      }
     };
     uint16_t sampleCount() { return _sampleCount; };
     void reset() { _sampleCount = 0; }
