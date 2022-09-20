@@ -667,7 +667,7 @@ const ZoneRec EasternSummer = {
     -4,
     sizeof(EasternSummerPts) / sizeof(FloatPt),
 	0.00, 89.00, 
-	-180, -57.10, 
+	-180, -57.104593031108379, 
 	EasternSummerPts
 };
 
@@ -1212,7 +1212,7 @@ const ZoneRec CentralSummer = {
     -5,
     sizeof(CentralSummerPts) / sizeof(FloatPt),
 	0.00, 89.00, 
-	-180, -79.83, 
+	-180, -79.827689034864306, 
 	CentralSummerPts
 };
 
@@ -1889,7 +1889,7 @@ const ZoneRec MountainSummer = {
     -6,
     sizeof(MountainSummerPts) / sizeof(FloatPt),
 	0.00, 89.00, 
-	-180, -87.14,
+	-180, -87.143393000587821,
 	MountainSummerPts
 };
 
@@ -2863,7 +2863,7 @@ const ZoneRec PacificSummer = {
     -7,
     sizeof(PacificSummerPts) / sizeof(FloatPt),
 	0.00, 89.00, 
-	-180, -108.42, 
+	-180, -108.42376003973186, 
 	PacificSummerPts
 };
 
@@ -2932,16 +2932,18 @@ const ZoneRec AlaskaSummer = {
     -8,
     sizeof(AlaskaSummerPts) / sizeof(FloatPt),
 	0.00, 89.00, 
-	-180, -129.97, 
+	-180, -129.97471603564918, 
 	AlaskaSummerPts
 };
 
+// Closed loop zones first, then west to east
 const ZoneRec* zonesSummer[] = {
 	&NewfoundlandSummer, 
 	&NavajoHopiJedditoSummer, 
 	&HopiNavajoSummer, 
 	&HopiNavajoMoenkopiSummer, 
-	&HyderAlaskaSummer, 
+	&HyderAlaskaSummer,
+
 	&AlaskaSummer, 
 	&PacificSummer, 
 	&MountainSummer, 

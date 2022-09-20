@@ -1,4 +1,3 @@
-// empty file to make Library Manager happy
 #include "ZoneCalc.h"
 
 // Timezone boundaries derived from:
@@ -51,7 +50,6 @@ bool ZoneCalc::isInside(const FloatPt p, const FloatPt polygon[], int numPts) {
 }
 
 float ZoneCalc::zoneOffsetForGPSCoord(float lat, float lon, bool summer) {
-    // elapsedMillis duration;
 	const ZoneRec** zones = (summer) ? zonesSummer : zonesWinter;
 	int zoneCount = (summer) ? SummerZoneCount : WinterZoneCount;
 	FloatPt p = { lat, lon };
@@ -61,10 +59,6 @@ float ZoneCalc::zoneOffsetForGPSCoord(float lat, float lon, bool summer) {
 
         if (lat>=zone->latMin && lat<=zone->latMax && lon>=zone->lonMin && lon<=zone->lonMax) {
             if (isInside(p, zone->pts, zone->numPts)) {
-                // Debug_print(duration);
-                // Debug_println("ms");
-                // Debug_print("Timezone: ");
-                // Debug_println(zone->name);
                 return zone->zoneOffset;
             }
         }

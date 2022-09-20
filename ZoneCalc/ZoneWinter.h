@@ -353,7 +353,7 @@ ZoneRec EasternWinter = {
     -5,
     sizeof(EasternWinterPts) / sizeof(FloatPt),
     0.00, 89.00, 
-    -180, -59.06, 
+    -180, -59.063671035692096, 
     EasternWinterPts
 };
 
@@ -912,7 +912,7 @@ const ZoneRec CentralWinter = {
     -6,
     sizeof(CentralWinterPts) / sizeof(FloatPt),
     0.00, 89.00, 
-    -180, -82.15, 
+    -180, -82.154745999723673, 
     CentralWinterPts
 };
 
@@ -1554,7 +1554,7 @@ const ZoneRec MountainWinter = {
     -7,
     sizeof(MountainWinterPts) / sizeof(FloatPt),
     0.00, 89.00, 
-    -180, -87.14, 
+    -180, -87.144221970811486, 
     MountainWinterPts
 };
 
@@ -2316,7 +2316,7 @@ const ZoneRec PacificWinter = {
     -8,
     sizeof(PacificWinterPts) / sizeof(FloatPt),
     0.00, 89.00, 
-    -180, -112.22, 
+    -180, -112.21507295966148, 
     PacificWinterPts
 };
 
@@ -2385,14 +2385,16 @@ const ZoneRec AlaskaWinter = {
     -9,
     sizeof(AlaskaWinterPts) / sizeof(FloatPt),
     0.00, 89.00, 
-    -180, -129.97, 
+    -180, -129.97471603564918, 
     AlaskaWinterPts
 };
 
+// Closed loop zones first, then west to east
 const ZoneRec* zonesWinter[] = { 
     &SaintPierreMiquelon, 
     &NewfoundlandWinter, 
-    &AlaskaAnnetteIsland, 
+    &AlaskaAnnetteIsland,
+
     &AlaskaWinter, 
     &PacificWinter, 
     &MountainWinter, 
